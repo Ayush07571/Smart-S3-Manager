@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>S3 Cost Optimization Exhibit</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>AWS S3 Optimization Exhibit 💰</h1>
+        <p class="description">Demonstrate cost savings by automating storage class transitions using your own AWS account.</p>
+        
+        <div class="config-panel">
+            <h2>AWS Credentials & Target</h2>
+            <div class="input-group">
+                <label for="accessKey">AWS Access Key ID:</label>
+                <input type="text" id="accessKey" placeholder="AKIA..." required>
+            </div>
+            <div class="input-group">
+                <label for="secretKey">AWS Secret Access Key:</label>
+                <input type="password" id="secretKey" placeholder="wJalr..." required>
+            </div>
+            <div class="input-group">
+                <label for="region">AWS Region:</label>
+                <input type="text" id="region" value="us-east-1" placeholder="e.g., us-east-1" required>
+            </div>
+            <div class="input-group">
+                <label for="bucketName">Target S3 Bucket Name:</label>
+                <input type="text" id="bucketName" placeholder="my-cost-optimized-bucket-123" required>
+            </div>
+        </div>
+
+        <div class="controls-panel">
+            <h2>Initial Setup Actions</h2>
+            <button id="createBucketBtn" class="action-btn primary">1. Create S3 Bucket</button>
+            <button id="uploadFileBtn" class="action-btn secondary">2. Upload Sample File (for testing)</button>
+
+            <hr>
+
+            <h2>Custom Policy Configuration</h2>
+            <p class="policy-note">Configure the rules for Glacier and expiration below (in days).</p>
+            <div class="policy-inputs">
+                <label>Glacier Transition (Days): <input type="number" id="glacierDays" value="30" min="1"></label>
+                <label>Deep Archive Transition (Days): <input type="number" id="deepArchiveDays" value="365" min="1"></label>
+                <label>Expiration (Days): <input type="number" id="expirationDays" value="3650" min="1"></label>
+            </div>
+            <button id="applyCustomLifecycleBtn" class="action-btn primary">3. Apply Custom Lifecycle Policy</button>
+
+            <hr>
+            
+            <h2>Intelligent-Tiering</h2>
+            <button id="enableIntelligentTieringBtn" class="action-btn secondary">4. Enable S3 Intelligent-Tiering</button>
+            <p class="policy-note">Enables automatic movement between Frequent/Infrequent tiers.</p>
+        </div>
+
+        <div class="status-panel">
+            <h2>Activity Status</h2>
+            <div id="statusMessage" class="status-box">Enter credentials and start an action.</div>
+        </div>
+        
+        <div class="log-panel">
+            <h2>Recent Log Entries</h2>
+            <pre id="logOutput">Click 'Fetch Logs' to view recent activity.</pre>
+            <button id="fetchLogsBtn" class="action-btn tertiary">Fetch Logs</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+# Create or edit .gitignore
+# Add these lines:
+venv/
+__pycache__/
+logs/
